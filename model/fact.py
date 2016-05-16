@@ -2,6 +2,14 @@ import json
 import boto
 import os
 from boto.s3.key import Key
+import boto3
+
+client = boto3.client(
+    's3',
+    region_name='eu-west-1',
+    aws_access_key_id=os.environ['ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['SECRET_ACCESS_KEY']
+)
 
 
 s3 = boto.connect_s3(os.environ['ACCESS_KEY_ID'], 
@@ -21,6 +29,8 @@ class Fact:
         return self.display
 
 def read_facts():
-    k.key = 'facts.json'
-    facts = k.get_contents_as_string()
-    return facts
+    response = client.get_object(
+        Bucket='greeny-facts',
+        Key='facts.json'
+    )
+    return response['Body'].read()
