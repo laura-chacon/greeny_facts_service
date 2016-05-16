@@ -11,12 +11,6 @@ client = boto3.client(
     aws_secret_access_key=os.environ['SECRET_ACCESS_KEY']
 )
 
-
-s3 = boto.connect_s3(os.environ['ACCESS_KEY_ID'], 
-                    os.environ['SECRET_ACCESS_KEY'])
-facts_bucket = s3.get_bucket('greeny-facts')
-k = Key(facts_bucket)
-
 class Fact:
     def __init__(self, **kwargs):
         self.fact_id = kwargs.get("fact_id", None)
