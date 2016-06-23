@@ -36,7 +36,6 @@ class JSONTranslator(object):
             return
         resp.body = json.dumps(req.context['result'])
 
-
 def add_routes(api):
     api.add_route('/facts', FactsController())
 
