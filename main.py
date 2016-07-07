@@ -47,4 +47,4 @@ def create_api():
     add_routes(api)
     return api
 
-create_api()
+api = create_api()
